@@ -3,6 +3,9 @@ package com.jchat.ui;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class RegisterScreen extends Screen {
 	private final String FIRST_NAME = "First Name";
@@ -14,38 +17,69 @@ public class RegisterScreen extends Screen {
 	private final String REGISTER = "Register Now";
 	private final String LOGIN = "Back to Login";
 	
+	// Notification Strings:
+	private final String PASSWORDS_NOT_MATCH = "The passwords do not match!";
+	
 	private Label lblFirstName;
 	private Label lblLastName;
 	private Label lblEmail;
 	private Label lblUsername;
 	private Label lblPassword;
 	private Label lblRepeatPassword;
+	
+	// Notification label:
+	private Label lblErrorWithRegistration;
+	
+	private TextField tfFirstName;
+	private TextField tfLastName;
+	private TextField tfEmail;
+	private TextField tfUsername;
+	private PasswordField pfPassword;
+	private PasswordField pfRepeatPassword;
+	
 	private Button btnRegister;
 	private Button btnLogin;
 	
 	private String screenTitle;
 	
-
 	public RegisterScreen(String screenTitle, int initialWidth, int initialHeight, int minWidth, int minHeight) {
 		super(screenTitle, initialWidth, initialHeight, minWidth, minHeight);
-		
+		// Labels
 		lblFirstName = new Label(FIRST_NAME);
 		lblLastName = new Label(LAST_NAME);
 		lblEmail = new Label(EMAIL);
 		lblUsername = new Label(USERNAME);
 		lblPassword = new Label(PASSWORD);
 		lblRepeatPassword = new Label(REPEAT_PASSWORD);
+		
+		// Notification label
+		lblErrorWithRegistration = new Label("");
+		
+		// Buttons
 		btnRegister = new Button(REGISTER);
 		btnLogin = new Button(LOGIN);
+		
+		// Text and password fields
+		tfFirstName = new TextField();
+		tfLastName = new TextField();
+		tfEmail = new TextField();
+		tfUsername = new TextField();
+		pfPassword = new PasswordField();
+		pfRepeatPassword = new PasswordField();
 	
 	}
 	
 	/*
-	 * TODO - Set up the scene for register screen
+	 * Instantiate the Scene Register Scene
 	 */
 	public Scene instantiateScene() {
-		//TODO - Set up the scene
-		return null;
+		VBox registerScreenVBox = new VBox();
+		registerScreenVBox.getChildren().addAll(lblFirstName, tfFirstName, lblLastName, tfLastName, lblEmail, 
+				tfEmail, lblUsername, tfUsername, lblPassword, pfPassword, lblRepeatPassword, pfRepeatPassword, btnRegister, btnLogin, lblErrorWithRegistration);
+		
+		Scene registserScreenScene = new Scene(registerScreenVBox, initialWidth, initialHeight);
+		registserScreenScene.getStylesheets().add("com/jchat/style/base_theme.css");
+		return registserScreenScene;
 	}
 
 	public Label getLblFirstName() {
@@ -92,8 +126,68 @@ public class RegisterScreen extends Screen {
 		return lblRepeatPassword;
 	}
 
+	public Label getLblErrorWithRegistration() {
+		return lblErrorWithRegistration;
+	}
+
+	public void setLblErrorWithRegistration(Label lblErrorWithRegistration) {
+		this.lblErrorWithRegistration = lblErrorWithRegistration;
+	}
+
+	public String getPASSWORDS_NOT_MATCH() {
+		return PASSWORDS_NOT_MATCH;
+	}
+
 	public void setLblRepeatPassword(Label lblRepeatPassword) {
 		this.lblRepeatPassword = lblRepeatPassword;
+	}
+
+	public TextField getTfFirstName() {
+		return tfFirstName;
+	}
+
+	public void setTfFirstName(TextField tfFirstName) {
+		this.tfFirstName = tfFirstName;
+	}
+
+	public TextField getTfLastName() {
+		return tfLastName;
+	}
+
+	public void setTfLastName(TextField tfLastName) {
+		this.tfLastName = tfLastName;
+	}
+
+	public TextField getTfEmail() {
+		return tfEmail;
+	}
+
+	public void setTfEmail(TextField tfEmail) {
+		this.tfEmail = tfEmail;
+	}
+
+	public TextField getTfUsername() {
+		return tfUsername;
+	}
+
+	public void setTfUsername(TextField tfUsername) {
+		this.tfUsername = tfUsername;
+	}
+
+	public PasswordField getPfPassword() {
+		return pfPassword;
+	}
+
+	public void setPfPassword(PasswordField pfPassword) {
+		this.pfPassword = pfPassword;
+	}
+
+	public PasswordField getPfRepeatPassword() {
+		return pfRepeatPassword;
+	}
+
+	public void setPfRepeatPassword(PasswordField pfRepeatPassword) {
+		this.pfRepeatPassword = pfRepeatPassword;
 	}
 
 	public Button getBtnRegister() {
@@ -151,7 +245,4 @@ public class RegisterScreen extends Screen {
 	public String getLOGIN() {
 		return LOGIN;
 	}
-	
-	
-
 }

@@ -79,8 +79,8 @@ public class NetworkHelper {
 		return retrievedUser;
 
 	}
-
-	public void createUserDataOnServer(User user) throws Exception {
+    // TODO - Return true if the creation is successful or false if it failed... Look at how to do this now
+	public boolean createUserDataOnServer(User user) throws Exception {
 		System.out.println("Testing 'create user data' method");
 		String url = SERVER_ADDRESS + "Register.php";
 
@@ -120,6 +120,9 @@ public class NetworkHelper {
 		}
 
 		bufferedReader.close();
+		
+		//TODO - change this so it can determine if the user was created successfully!!
+		return true;
 
 	}
 
