@@ -3,13 +3,8 @@
  * Student Name: Dean Brown
  * Student Number: 20066915
  * Project Name: JChat
- * Project Description: Chat application 
- * 
- * TODO - Home screen loads but with the wrong details!
- * 
- * TODO - Create methods in this class to display the homescreen, 
- * the login screen and the register screen rather than repeating the same code
- * 
+ * Project Description: Chat (IM) client application 
+ *  
  * TODO - Abstract the network class to allow the definitive details to be stored 
  * in a super class which each element of the network classes can access.
  * 
@@ -32,7 +27,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class JChat extends Application {
-	// Set to true to test the loginSCreen (Change to to black afterwards!)
+	// TODO - After setting up the sqlite database change this to blank 
 	boolean isUserLoggedIn = false;
 	
 	public static void main(String[] args) {
@@ -44,6 +39,7 @@ public class JChat extends Application {
 		if(!isUserLoggedIn) {
 			/*
 			 * If the user is not logged in show them the login screen 
+			 * else set up the homescreen based on the users sqlite database info!
 			 */
 			LoginScreen loginScreen = new LoginScreen("Login", 500, 400, 400, 300); 
 			Scene loginScene = loginScreen.instantiateScene();
@@ -67,20 +63,25 @@ public class JChat extends Application {
 					
 					NetworkHelper accountHelper = new NetworkHelper("FetchUserData.php");
 					try {
-						//TODO - Create the homescreen
 						User returnedUser = accountHelper.fetchUserDetailsFromServer(loginUser);
+						// TODO - change this to pass in the users details after fetching it from the server
+						// TODO - Get the logout button to display and Add a Event listener to the Logout button!
 						HomeScreen homeScreen = new HomeScreen(returnedUser, "Home", 500, 400, 400, 300); 
+						System.out.println("TESTING - "
+								+ "\nFirstname: " + returnedUser.getFirstName()
+								+ "\nLastname: " + returnedUser.getLastName()
+								+ "\nUsername: " + returnedUser.getUsername()
+								+ "\nEmail: " + returnedUser.getEmail()
+								+ "\nPassword: " + returnedUser.getPassword());
 						homeScreen.setFirstName(returnedUser.getFirstName());
 						homeScreen.setLastName(returnedUser.getLastName());
 						homeScreen.setEmail(returnedUser.getEmail());
 						homeScreen.setUsername(returnedUser.getUsername());
 						homeScreen.setPassword(returnedUser.getPassword());
+						Button btnLogoutButton = homeScreen.getBtnLogout();
 						Scene homeScreenScene = homeScreen.instantiateScene();
 						primaryStage.setScene(homeScreenScene);
 						primaryStage.show();
-						Button btnLogoutButton = homeScreen.getBtnLogout();
-						// TODO - Add a Event listener to the Logout button!
-						
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
@@ -91,7 +92,12 @@ public class JChat extends Application {
 				@Override
 				public void handle(ActionEvent event) {
 					System.out.println("Changing to register page. . . ");
-					// TODO - Set up the registration Screen!
+					RegisterScreen registerScreen = new RegisterScreen("Register", 500, 400, 400, 300);
+					Scene registerScreenScene = registerScreen.instantiateScene();
+					primaryStage.setScene(registerScreenScene);
+					primaryStage.show();
+					Button btnRegister = registerScreen.getBtnRegister();
+					Button btnLogin = registerScreen.getBtnLogin();
 				}
 			});
 			

@@ -44,7 +44,114 @@ public class RegisterScreen extends Screen {
 	 * TODO - Set up the scene for register screen
 	 */
 	public Scene instantiateScene() {
+		//TODO - Set up the scene
 		return null;
 	}
+
+	public Label getLblFirstName() {
+		return lblFirstName;
+	}
+
+	public void setLblFirstName(Label lblFirstName) {
+		this.lblFirstName = lblFirstName;
+	}
+
+	public Label getLblLastName() {
+		return lblLastName;
+	}
+
+	public void setLblLastName(Label lblLastName) {
+		this.lblLastName = lblLastName;
+	}
+
+	public Label getLblEmail() {
+		return lblEmail;
+	}
+
+	public void setLblEmail(Label lblEmail) {
+		this.lblEmail = lblEmail;
+	}
+
+	public Label getLblUsername() {
+		return lblUsername;
+	}
+
+	public void setLblUsername(Label lblUsername) {
+		this.lblUsername = lblUsername;
+	}
+
+	public Label getLblPassword() {
+		return lblPassword;
+	}
+
+	public void setLblPassword(Label lblPassword) {
+		this.lblPassword = lblPassword;
+	}
+
+	public Label getLblRepeatPassword() {
+		return lblRepeatPassword;
+	}
+
+	public void setLblRepeatPassword(Label lblRepeatPassword) {
+		this.lblRepeatPassword = lblRepeatPassword;
+	}
+
+	public Button getBtnRegister() {
+		return btnRegister;
+	}
+
+	public void setBtnRegister(Button btnRegister) {
+		this.btnRegister = btnRegister;
+	}
+
+	public Button getBtnLogin() {
+		return btnLogin;
+	}
+
+	public void setBtnLogin(Button btnLogin) {
+		this.btnLogin = btnLogin;
+	}
+
+	public String getScreenTitle() {
+		return screenTitle;
+	}
+
+	public void setScreenTitle(String screenTitle) {
+		this.screenTitle = screenTitle;
+	}
+
+	public String getFIRST_NAME() {
+		return FIRST_NAME;
+	}
+
+	public String getLAST_NAME() {
+		return LAST_NAME;
+	}
+
+	public String getEMAIL() {
+		return EMAIL;
+	}
+
+	public String getUSERNAME() {
+		return USERNAME;
+	}
+
+	public String getPASSWORD() {
+		return PASSWORD;
+	}
+
+	public String getREPEAT_PASSWORD() {
+		return REPEAT_PASSWORD;
+	}
+
+	public String getREGISTER() {
+		return REGISTER;
+	}
+
+	public String getLOGIN() {
+		return LOGIN;
+	}
+	
+	
 
 }

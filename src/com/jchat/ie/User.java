@@ -10,7 +10,7 @@ public class User {
 	/*
 	 * Created when the user loggs in fully
 	 */
-	public User(String firstName, String lastName, String username, String email, String password) {
+	public User(String firstName, String lastName, String email, String username , String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
