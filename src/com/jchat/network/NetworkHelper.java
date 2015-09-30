@@ -15,8 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONObject;
-
 import com.jchat.ie.User;
+
 
 public class NetworkHelper {
 	private final String SERVER_ADDRESS = "http://testsecretapp.eu5.org/";

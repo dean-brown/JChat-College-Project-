@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,13 +23,15 @@ public class LoginScreen extends Screen {
 	private final String PASSWORD = "Password";
 	private final String BUTTON_LOGIN = "Login";
 	private final String BUTTON_REGISTER = "Register";
-	
-	// These might be made final (Might just remove the private final Strings and hardcode the labels >.<)
+	private final String REMEMBER_ME = "Remember Me?";
 	private String screenTitle;
+	
 	private Label lblUsername;
 	private Label lblPassword;
 	private TextField tfUsername;
 	private PasswordField pfPassword;
+	
+	private CheckBox rememberMe;
 	private Button btnLogin;
 	private Button btnRegister;
 
@@ -39,6 +42,7 @@ public class LoginScreen extends Screen {
 		lblPassword = new Label(PASSWORD);
 		tfUsername = new TextField();
 		pfPassword = new PasswordField();
+		rememberMe = new CheckBox(REMEMBER_ME);
 		btnLogin = new Button(BUTTON_LOGIN);
 		btnRegister = new Button(BUTTON_REGISTER);
 	}
@@ -48,14 +52,11 @@ public class LoginScreen extends Screen {
 	 */
 	public Scene instantiateScene() {
 		VBox loginVBox = new VBox();
-		loginVBox.getChildren().addAll(lblUsername, tfUsername, lblPassword, pfPassword,
+		loginVBox.getChildren().addAll(lblUsername, tfUsername, lblPassword, pfPassword, rememberMe,
 				btnLogin, btnRegister);
 		
-		// Create the screne
+		// Create the scene, grab stylesheets and return. . . 
 		Scene loginScene = new Scene(loginVBox, initialWidth, initialHeight);
-		/*
-		 * Need to set the minimum width and height somehow!
-		 */
 		loginScene.getStylesheets().add("com/jchat/style/base_theme.css");
 		return loginScene;
 	}

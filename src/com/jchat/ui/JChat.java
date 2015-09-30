@@ -5,24 +5,19 @@
  * Project Name: JChat
  * Project Description: Chat (IM) client application 
  * 
+ * TODO - Break up the functions of JChat - Figure out a way of breaking this up and still implementing the OnAction(<EventListener>)
+ * TODO - Abstract the network class. . . NetworkHelper.class  NetworkAccountHelper.class  NetworkMessengerHelper.class
+ * TODO - Set up error handling for Networking issues, Registration problems, Login Problems, Other Exception
+ * ------ For this i might create a custom exception class
  * 
- * TODO - Create the methods. Then cut this whole section out of here and paste the rebuild with the methods below!!!!!
+ * TODO - Set 
  * 
- * TODO - Methods really need to be set up for this class SOME SERIOUS PLANNING IS NEEDED TONIGHT BEFORE THIS GETS TO BIG!!!
- *  
- * TODO - Abstract the network class to allow the definitive details to be stored 
- * in a super class which each element of the network classes can access.
- * 
- * TODO - Set this class up to implement some sort of click handler to pass control to a method with a switch! all the setOnAction events are a massive pain!!!!!
- * 
- * TODO - Test the register screen
- * 
- * TODO - Error handling!
  * 
  */
 
 package com.jchat.ui;
 
+import com.jchat.ie.Chat;
 import com.jchat.ie.User;
 import com.jchat.network.NetworkHelper;
 
@@ -34,11 +29,23 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class JChat extends Application {
+	// Screens: (Might set these and startup! (See how long it takes. . . )
 	private HomeScreen homeScreen;
 	private LoginScreen loginScreen;
 	private RegisterScreen registerScreen;
 	
-	// TODO - After setting up the sqlite database change this to blank 
+	// Scenes:
+	private Scene homeScreenScene;
+	private Scene loginScreenScene;
+	private Scene registerScreenScene;
+	
+	// Tracks the current Scene:
+	private Scene currentScene;
+	
+	// Later we create an array of chats which themselves have an array of messages.
+	private Chat[] chats;
+	
+	// When sqlite is set up we will leave this blank
 	boolean isUserLoggedIn = false;
 	
 	public static void main(String[] args) {
@@ -48,19 +55,10 @@ public class JChat extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		if(!isUserLoggedIn) {
-			/*
-			 * If the user is not logged in show them the login screen 
-			 * else set up the homescreen based on the users sqlite database info!
-			 */
-			LoginScreen loginScreen = new LoginScreen("Login", 500, 400, 400, 300); 
-			Scene loginScene = loginScreen.instantiateScene();
-			primaryStage.setScene(loginScene);
+			CreateLoginScreen();
+			primaryStage.setScene(loginScreenScene);
 			primaryStage.setTitle(loginScreen.getScreenTitle());
 			primaryStage.show();
-			
-			/*
-			 * Create the buttons and their listeners
-			 */
 			Button btnLogin = loginScreen.getBtnLogin();
 			Button btnRegister = loginScreen.getBtnRegister();
 			
@@ -76,6 +74,7 @@ public class JChat extends Application {
 					try {
 						User returnedUser = loginHelper.fetchUserDetailsFromServer(loginUser);
 						HomeScreen homeScreen = new HomeScreen(returnedUser, "Home", 500, 400, 400, 300); 
+						// Print out the users details!
 						System.out.println("TESTING - "
 								+ "\nFirstname: " + returnedUser.getFirstName()
 								+ "\nLastname: " + returnedUser.getLastName()
@@ -87,6 +86,7 @@ public class JChat extends Application {
 						homeScreen.setEmail(returnedUser.getEmail());
 						homeScreen.setUsername(returnedUser.getUsername());
 						homeScreen.setPassword(returnedUser.getPassword());
+						
 						Button btnLogoutButton = homeScreen.getBtnLogout();
 						Scene homeScreenScene = homeScreen.instantiateScene();
 						primaryStage.setScene(homeScreenScene);
@@ -123,7 +123,6 @@ public class JChat extends Application {
 								String regUserPassword = registerScreen.getPfPassword().getText().toString();
 								String regUserRepeatPassword = registerScreen.getPfRepeatPassword().getText().toString();
 								
-								//TODO - This is returning false for some reason!!!!!!!
 								if(checkRepeatPassword(regUserPassword, regUserRepeatPassword)) {
 									System.out.println("Passwords match");
 									// TODO - Insert the password into the database
@@ -182,25 +181,38 @@ public class JChat extends Application {
 	 */
 	
 	// Creates the HomeScreenScene:
-	private void CreateHomeScreen() {
-		
+	private void CreateHomeScreen(User loggedInUser) {
+		homeScreen = new HomeScreen(loggedInUser, "Home", 500, 400, 500, 400);
+		homeScreenScene = homeScreen.instantiateScene();
 		
 	}
 	// Creates the LoginScreenScene:
 	private void CreateLoginScreen() {
-		
+		loginScreen = new LoginScreen("Login Here", 500, 400, 500, 400);
+		loginScreenScene = loginScreen.instantiateScene();
 	}
  	
 	// Creates the RegisterScreenScene:
 	private void CreateRegisterScreen() {
+		registerScreen = new RegisterScreen("Register", 500, 400, 500, 400);
+	}
+	
+	// Authenticates the user
+	private void authenticateUser(User userToAuth) {
 		
 	}
 	
+	// Create new user 
+	private void createNewUser() {
+		
+	}
 	
+	// Pull users chats:
+	private void refreshChats() {
+		
+	}
 	
-	/*
-	 * Returns true if the passwords match or false if they do not match!
-	 */
+	// Checks password and repeat password are the same.
 	public boolean checkRepeatPassword(String password, String repeatPassword) {
 		System.out.println("Password: " + password + "\n" + "Repeat Password: " + repeatPassword);
 		if(password.equals(repeatPassword)) {
